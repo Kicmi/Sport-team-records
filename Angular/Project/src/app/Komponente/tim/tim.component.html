@@ -1,0 +1,77 @@
+<mat-toolbar color="primary">
+    <span class="naslov">Tim</span>
+   </mat-toolbar>
+  
+   <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)"
+     placeholder="Filter">
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"> 
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="naziv">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Naziv </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.naziv}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="osnovan">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Osnovan </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.osnovan}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sediste">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sediste </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.sediste}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="liga">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Liga </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.ligaBean.naziv}} </mat-cell>
+      </ng-container>
+
+  
+  
+      <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+  
+            <button mat-icon-button color="primary" (click)="openDialog(1)">
+              <mat-icon>add</mat-icon>
+            </button>
+  
+          </mat-header-cell>
+  
+          <mat-cell *matCellDef="let row; let i=index;">
+  
+            <button mat-icon-button color="primary" (click)="openDialog(2, row.id, row.naziv, row.osnovan, row.sediste, row.ligaBean)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+  
+            <button mat-icon-button color="primary" (click)="openDialog(3, row.id, row.naziv, row.osnovan, row.sediste, row.ligaBean)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+  
+          </mat-cell>
+        </ng-container>
+  
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"
+      (click)="selectRow(row)"
+    [ngClass]="{'selectRow': selektovanTim != null && selektovanTim.id == row.id}" ></mat-row>
+  
+        
+  
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    <div class = "container mat-elevation-z8">
+      <app-igrac *ngIf = "selektovanTim" [selektovanTim]  = "selektovanTim"></app-igrac>
+    </div>

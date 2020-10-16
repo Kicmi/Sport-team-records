@@ -1,0 +1,41 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Aplikacija
+          </mat-panel-title>
+          <mat-panel-description>
+            Evidencija
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        
+        
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <button mat-button [routerLink]="['/nacionalnost']">Nacionalnost</button>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <button mat-button [routerLink]="['/liga']">Liga</button>
+          </mat-list-item>
+          <mat-list-item role="listitem">
+            <button mat-button [routerLink]="['/tim']">Tim</button>
+          </mat-list-item>
+        </mat-list>
+        
+
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+
+
+  </mat-drawer>
+  <mat-drawer-content>
+    
+    <router-outlet></router-outlet>
+
+  </mat-drawer-content>
+</mat-drawer-container>
